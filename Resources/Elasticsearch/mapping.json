@@ -1,0 +1,19 @@
+{
+    "params": {
+        "dynamic": "strict",
+        "properties": {
+            "script": {
+                "type": "string"
+            },
+            "source": {
+                "type": "string"
+            },
+            "parameters": {
+                "type": "string"
+            },
+            "fileTags": {
+                "type": "array"
+            }
+        }
+    }
+}

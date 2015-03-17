@@ -1,0 +1,15 @@
+parameters:
+    app_name:               luckyguess-r-bundle
+
+    config_sapi.url:
+    config_sapi.token:      
+
+    config.rScript:         "/usr/bin/Rscript"
+    config.dbDriver:        "postgresql-9.1-901.jdbc4.jar"
+
+    encryption_key:         
+
+    components: 
+        rt-lucky-guess-r:
+            class:          Keboola\LuckyGuessRBundle\MainTransformation
+            bundle:         Keboola\LuckyGuessRBundle\KeboolaLuckyGuessRBundle

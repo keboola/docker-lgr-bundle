@@ -1,0 +1,54 @@
+{
+    "name": "keboola/luckyguess-r-bundle",
+    "type": "symfony-bundle",
+    "description": "LuckyGuess R Backend",
+    "keywords": [
+        "keboola",
+        "luckyguess",
+        "r"
+    ],
+    "authors": [
+        {
+            "name": "Ondřej Popelka",
+            "email": "ondrej.popelka@keboola.com"
+        }
+    ],
+    "repositories": [],
+    "require": {
+        "php": ">=5.3.5",
+        "keboola/syrup": "~2.1.0",
+        "keboola/provisioning-client": "0.4.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getParameters",
+            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getSharedParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+        ],
+        "post-update-cmd": [
+            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getParameters",
+            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getSharedParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+        ]
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": {"Keboola\\LuckyGuessRBundle": ""}
+    },
+    "target-dir": "Keboola/LuckyGuessRBundle",
+    "extra": {
+        "syrup-app-name": "rt-lucky-guess-r",
+        "symfony-app-dir": "vendor/keboola/syrup/app",
+        "symfony-web-dir": "vendor/keboola/syrup/web",
+        "incenteev-parameters": {
+            "keep-outdated": true,
+            "file": "vendor/keboola/syrup/app/config/parameters.yml",
+            "dist-file": "parameters.yml"
+        }
+    }
+}

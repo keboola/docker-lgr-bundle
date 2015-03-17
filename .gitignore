@@ -1,0 +1,5 @@
+/vendor
+/.idea
+/RScripts/.RData
+/RScripts/.Rhistory
+/RScripts/RStudioRunner.R
