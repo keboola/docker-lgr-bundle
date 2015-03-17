@@ -1,11 +1,12 @@
 {
-    "name": "keboola/luckyguess-r-bundle",
+    "name": "keboola/docker-lgr-bundle",
     "type": "symfony-bundle",
-    "description": "LuckyGuess R Backend",
+    "description": "LuckyGuess R Backend for running in Keboola Docker",
     "keywords": [
         "keboola",
         "luckyguess",
-        "r"
+        "r",
+        "docker"
     ],
     "authors": [
         {
@@ -15,7 +16,7 @@
     ],
     "repositories": [],
     "require": {
-        "php": ">=5.3.5",
+        "php": ">=5.4.0",
         "keboola/syrup": "~2.1.0",
         "keboola/provisioning-client": "0.4.*"
     },
@@ -38,11 +39,11 @@
     },
     "minimum-stability": "stable",
     "autoload": {
-        "psr-0": {"Keboola\\LuckyGuessRBundle": ""}
+        "psr-0": {"Keboola\\DockerLGRBundle": ""}
     },
-    "target-dir": "Keboola/LuckyGuessRBundle",
+    "target-dir": "Keboola/DockerLGRBundle",
     "extra": {
-        "syrup-app-name": "rt-lucky-guess-r",
+        "syrup-app-name": "docker-lgr-bundle",
         "symfony-app-dir": "vendor/keboola/syrup/app",
         "symfony-web-dir": "vendor/keboola/syrup/web",
         "incenteev-parameters": {

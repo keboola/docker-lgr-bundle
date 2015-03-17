@@ -1,6 +1,6 @@
 <?php
 
-namespace Keboola\LuckyGuessRBundle\Tests\Controller;
+namespace Keboola\DockerLGRBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Keboola\LuckyGuessRBundle;
+namespace Keboola\DockerLGRBundle;
 
 use Keboola\StorageApi\Config\Exception;
 
