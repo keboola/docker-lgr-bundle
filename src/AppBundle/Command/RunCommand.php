@@ -116,8 +116,9 @@ class RunCommand extends ContainerAwareCommand
         $this->fs = new Filesystem();
 
         // get Storage API token and initialize client
-        if (!empty(getenv('KBC_TOKENID'))) {
-            $token = getenv('KBC_TOKENID');
+        $env = getenv('KBC_TOKENID');
+        if (!empty($env)) {
+            $token = $env;
         } else {
             throw new \InvalidArgumentException("Storage API token must be provided in configuration.");
         }
@@ -129,8 +130,9 @@ class RunCommand extends ContainerAwareCommand
         );
 
         // get Storage API Run ID
-        if (!empty(getenv('KBC_RUNID'))) {
-            $runId = getenv('KBC_RUNID');
+        $env = getenv('KBC_RUNID');
+        if (!empty($env)) {
+            $runId = $env;
             $storageClient->setRunId($runId);
         } else {
             $runId = '';
