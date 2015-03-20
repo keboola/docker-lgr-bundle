@@ -15,5 +15,5 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     storage_api_url: https://connection.keboola.com
-    rScript: C:\Program Files\R\R-3.1.2\bin\x64\rscript.exe
+    rScript: "/usr/bin/Rscript"
     dbDriver: postgresql-9.1-901.jdbc4.jar

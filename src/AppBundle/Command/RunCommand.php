@@ -120,7 +120,9 @@ class RunCommand extends ContainerAwareCommand
         if (!empty($env)) {
             $token = $env;
         } else {
-            throw new \InvalidArgumentException("Storage API token must be provided in configuration.");
+            throw new \InvalidArgumentException(
+                "Storage API token must be provided in environment variable KBC_TOKENID."
+            );
         }
         $storageClient = new StorageApiClient(
             [
@@ -149,7 +151,11 @@ class RunCommand extends ContainerAwareCommand
             $this->provisioning = new ProvisioningClient('redshift', $token, $runId);
 
             // read configuration file injected by Docker (keboola\docker-bundle)
-            $this->dataDir = realpath($input->getOption('data'));
+            $this->dataDir = $input->getOption('data');
+            if (!file_exists($this->dataDir) || !is_dir($this->dataDir)) {
+                throw new \InvalidArgumentException("Data directory does not exist or is not directory.");
+            }
+            $this->dataDir = realpath($this->dataDir);
             $this->logger->debug("Using directory: $this->dataDir");
             $config = Yaml::parse(file_get_contents($this->dataDir . DIRECTORY_SEPARATOR . "config.yml"));
 
