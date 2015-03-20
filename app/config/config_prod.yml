@@ -1,0 +1,17 @@
+imports:
+    - { resource: config.yml }
+
+monolog:
+    handlers:
+        syrup_syslog:
+            type: syslog
+            ident: %app_name%
+            level: info
+            channels: ["!request", "!event", "!doctrine"]
+            formatter: syrup.monolog.formatter
+        storage_api:
+            type: service
+            id: app_bundle.event_handler
+            ident: %app_name%
+            level: info
+            channels: ["!request", "!event", "!doctrine"]

@@ -1,0 +1,8 @@
+parameters:
+
+services:
+    app_bundle.event_handler:
+        class: AppBundle\EventHandler\EventHandler
+
+    syrup.monolog.formatter:
+        class: AppBundle\Formatter\JsonFormatter

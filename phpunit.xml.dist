@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="true"
+         syntaxCheck="false"
+         bootstrap="src/AppBundle/Tests/bootstrap.php">
+    <php>
+        <server name="KERNEL_DIR" value="app/" />
+        <ini name="display_errors" value="true"/>
+    </php>
+    <testsuites>
+        <testsuite name="base-tests">
+            <directory>src/AppBundle/Tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

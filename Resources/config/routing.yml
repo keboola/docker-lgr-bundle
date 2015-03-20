@@ -1,9 +1,0 @@
-luckyguess_r_exec:
-    path:     /exec
-    defaults: { _controller: KeboolaLuckyGuessRBundle:Default:exec, _format: json }
-    methods:  [POST]
-
-luckyguess_r_list:
-    path:     /list
-    defaults: { _controller: KeboolaLuckyGuessRBundle:Default:list, _format: json }
-    methods:  [GET]

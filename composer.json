@@ -1,6 +1,6 @@
 {
     "name": "keboola/docker-lgr-bundle",
-    "type": "symfony-bundle",
+    "type": "project",
     "description": "LuckyGuess R Backend for running in Keboola Docker",
     "keywords": [
         "keboola",
@@ -14,42 +14,65 @@
             "email": "ondrej.popelka@keboola.com"
         }
     ],
-    "repositories": [],
+    "autoload": {
+        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+    },
     "require": {
-        "php": ">=5.4.0",
-        "keboola/syrup": "~2.1.0",
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.6.*",
+        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
+        "doctrine/dbal": "<2.5",
+        "doctrine/doctrine-bundle": "~1.2",
+        "twig/extensions": "~1.0",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~3.0,>=3.0.12",
+        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "keboola/storage-api-client": ">=2.0.0",
         "keboola/provisioning-client": "0.4.*"
     },
+    "minimum-stability": "stable",
     "require-dev": {
+        "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "3.7.*"
     },
     "scripts": {
+        "post-root-package-install": [
+            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        ],
         "post-install-cmd": [
-            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getParameters",
-            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getSharedParameters",
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-update-cmd": [
-            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getParameters",
-            "Keboola\\Syrup\\DeploymentHandler\\ScriptHandler::getSharedParameters",
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
     },
-    "minimum-stability": "stable",
-    "autoload": {
-        "psr-0": {"Keboola\\DockerLGRBundle": ""}
+    "config": {
+        "bin-dir": "bin"
     },
-    "target-dir": "Keboola/DockerLGRBundle",
     "extra": {
-        "syrup-app-name": "docker-lgr-bundle",
-        "symfony-app-dir": "vendor/keboola/syrup/app",
-        "symfony-web-dir": "vendor/keboola/syrup/web",
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "keep-outdated": true,
-            "file": "vendor/keboola/syrup/app/config/parameters.yml",
-            "dist-file": "parameters.yml"
+            "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "2.6-dev"
         }
     }
 }

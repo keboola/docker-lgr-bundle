@@ -1,0 +1,37 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router:
+        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+monolog:
+     handlers:
+        my_file_log:
+            ident: %app_name%
+            type: stream
+            level: debug
+            path: C:\\Temp\\Lg\\symfony.log
+            channels: ["!request", "!event", "!doctrine"]
+            bubble: false
+        syrup_syslog:
+            type: syslog
+            ident: %app_name%
+            level: debug
+            channels: ["!request", "!event", "!doctrine"]
+            formatter: syrup.monolog.formatter
+        storage_api:
+            type: service
+            id: app_bundle.event_handler
+            ident: %app_name%
+            level: info
+            channels: ["!request", "!event", "!doctrine"]
+
+assetic:
+    use_controller: true
