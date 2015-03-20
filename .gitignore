@@ -12,3 +12,4 @@
 /composer.phar
 .idea
 /src/AppBundle/Tests/config.php
+/data/config.yml
