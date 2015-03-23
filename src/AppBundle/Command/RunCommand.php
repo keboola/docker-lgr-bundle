@@ -299,6 +299,6 @@ class RunCommand extends ContainerAwareCommand
      */
     private function getOutDirectory()
     {
-        return $this->dataDir . DIRECTORY_SEPARATOR . 'out' . DIRECTORY_SEPARATOR;
+        return $this->dataDir . DIRECTORY_SEPARATOR . 'out' . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
     }
 }
