@@ -157,7 +157,12 @@ class RunCommand extends ContainerAwareCommand
             }
             $this->dataDir = realpath($this->dataDir);
             $this->logger->debug("Using directory: $this->dataDir");
-            $config = Yaml::parse(file_get_contents($this->dataDir . DIRECTORY_SEPARATOR . "config.yml"));
+
+            $configFileName = $this->dataDir . DIRECTORY_SEPARATOR . "config.yml";
+            if (!file_exists($configFileName)) {
+                throw new \InvalidArgumentException("config.yml is not present in data directory.");
+            }
+            $config = Yaml::parse(file_get_contents($configFileName));
 
             // verify and process configuration parameters
             if (isset($config['parameters']['debug'])) {
