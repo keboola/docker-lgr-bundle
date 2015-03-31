@@ -1,4 +1,3 @@
-# VERSION 1.0.12
 FROM keboola/base-php
 MAINTAINER Ondrej Popelka <ondrej.popelka@keboola.com>
 
@@ -13,7 +12,6 @@ WORKDIR /home
 
 # Initialize 
 RUN git clone https://github.com/keboola/docker-lgr-bundle ./
-RUN git checkout tags/1.0.0
 RUN composer install --no-interaction
 
 ENTRYPOINT php ./app/console lgr:run --data=/data
