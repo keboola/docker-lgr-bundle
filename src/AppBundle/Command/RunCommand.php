@@ -110,6 +110,7 @@ class RunCommand extends ContainerAwareCommand
      *
      * @param InputInterface $input An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
+     * @throws \Exception
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
@@ -279,9 +280,9 @@ class RunCommand extends ContainerAwareCommand
                 // write manifest
                 $manifest = [
                     'name' => $row['value'],
-                    'is_public' => 0,
-                    'is_permanent' => 1,
-                    'notify' => 0,
+                    'is_public' => false,
+                    'is_permanent' => true,
+                    'notify' => false,
                     'tags' => array_merge($this->fileTags, [$row['name'], 'LuckyGuess'])
                 ];
                 $this->fs->dumpFile(
