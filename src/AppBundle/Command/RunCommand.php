@@ -293,9 +293,11 @@ class RunCommand extends ContainerAwareCommand
             $this->logger->info("Everything finished.");
         } catch (\InvalidArgumentException $e) {
             $this->logger->error("There was an error in input: " . $e->getMessage());
+            throw $e;
         } catch (\Exception $e) {
             $this->logger->error("Application error.");
             $this->logger->debug("Application error: " . $e->getMessage());
+            throw $e;
         }
     }
 
