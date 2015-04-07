@@ -167,7 +167,7 @@ class RunCommand extends ContainerAwareCommand
 
             // verify and process configuration parameters
             if (isset($config['parameters']['debug'])) {
-                $this->debug = boolval($config['parameters']['debug']);
+                $this->debug = (bool)($config['parameters']['debug']);
             } else {
                 $this->debug = $this->getContainer()->getParameter('kernel.environment');
             }
