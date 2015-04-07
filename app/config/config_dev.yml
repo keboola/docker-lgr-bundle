@@ -17,7 +17,7 @@ monolog:
             ident: %app_name%
             type: stream
             level: debug
-            path: C:\\Temp\\Lg\\symfony.log
+            path: /data/debug.log
             channels: ["!request", "!event", "!doctrine"]
             bubble: false
         syrup_syslog:
