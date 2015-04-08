@@ -169,7 +169,7 @@ class RunCommand extends ContainerAwareCommand
 
             // verify and process configuration parameters
             if (isset($config['parameters']['debug'])) {
-                $this->debug = boolval($config['parameters']['debug']);
+                $this->debug = (bool)($config['parameters']['debug']);
             } else {
                 $this->debug = $this->getContainer()->getParameter('kernel.environment');
             }
@@ -295,9 +295,11 @@ class RunCommand extends ContainerAwareCommand
             $this->logger->info("Everything finished.");
         } catch (\InvalidArgumentException $e) {
             $this->logger->error("There was an error in input: " . $e->getMessage());
+            throw $e;
         } catch (\Exception $e) {
             $this->logger->error("Application error.");
             $this->logger->debug("Application error: " . $e->getMessage());
+            throw $e;
         }
     }
 
