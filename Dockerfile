@@ -2,6 +2,8 @@ FROM keboola/base-php
 MAINTAINER Ondrej Popelka <ondrej.popelka@keboola.com>
 
 RUN yum -y install R
+RUN yum -y install php-pgsql
+
 # Create html folder under the R directory (name of directory depends on version)
 RUN find /usr/share/doc/ -name R* -exec mkdir '{}/html' \;
 
