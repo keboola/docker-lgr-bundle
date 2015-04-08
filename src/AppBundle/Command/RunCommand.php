@@ -122,7 +122,9 @@ class RunCommand extends ContainerAwareCommand
             $token = $env;
         } else {
             throw new \InvalidArgumentException(
-                "Storage API token must be provided in environment variable KBC_TOKENID."
+                "Storage API token must be provided in environment variable KBC_TOKENID. " .
+                "Available environment variables are: ".
+                implode(',', array_merge(array_keys($_SERVER), array_keys($_ENV)))
             );
         }
         $storageClient = new StorageApiClient(
