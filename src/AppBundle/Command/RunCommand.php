@@ -175,8 +175,8 @@ class RunCommand extends ContainerAwareCommand
             }
             $this->logger->debug("Debug mode set to : " . (int)($this->debug));
 
-            if (isset($config['fileTags']) && is_array($config['fileTags'])) {
-                $this->fileTags = $config['fileTags'];
+            if (isset($config['parameters']['fileTags']) && is_array($config['parameters']['fileTags'])) {
+                $this->fileTags = $config['parameters']['fileTags'];
             } else {
                 $this->fileTags = [];
             }
