@@ -253,7 +253,7 @@ wrapper.run <- function(moduleToExecute = NULL, jdbcDriver = NULL, jdbcUrl = NUL
 
 	# make globally available the list of tables (it should be accessed via wrapper.saveDataFrame())
 	tableNames <- data.frame(name = character(), stringsAsFactors = FALSE)
-  assign('wrapper.tableNames', tableNames, envir = .GlobalEnv)
+    assign('wrapper.tableNames', tableNames, envir = .GlobalEnv)
 
 	# run the module
 	if (interactive()) {
@@ -283,7 +283,7 @@ wrapper.run <- function(moduleToExecute = NULL, jdbcDriver = NULL, jdbcUrl = NUL
     redshift.saveDataFrame(wrapper.fileNames, fileNamesTable, rowNumbers = FALSE, incremental = TRUE)
     redshift.saveDataFrame(wrapper.tableNames, tableNamesTable, rowNumber = FALSE, incremental = TRUE)
 
-  TRUE
+    TRUE
 }
 
 
@@ -465,7 +465,7 @@ wrapper.saveDataFrame <- function(dataFrame, tableName, rowNumbers = FALSE, incr
     } else {
         redshift.saveDataFrame(dataFrame, tableName, rowNumbers, incremental, forcedColumnTypes)
     }
-    newRow <- data.frame(wrapper.tableNames, stringsAsFactors = FALSE)
+    newRow <- data.frame(tableName, stringsAsFactors = FALSE)
     kv <- rbind(wrapper.tableNames, newRow)
     assign('wrapper.tableNames', kv, envir = .GlobalEnv)
 }
