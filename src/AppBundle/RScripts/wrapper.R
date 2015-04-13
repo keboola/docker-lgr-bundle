@@ -465,7 +465,7 @@ wrapper.saveDataFrame <- function(dataFrame, tableName, rowNumbers = FALSE, incr
     } else {
         redshift.saveDataFrame(dataFrame, tableName, rowNumbers, incremental, forcedColumnTypes)
     }
-    newRow <- data.frame(tableName, stringsAsFactors = FALSE)
+    newRow <- data.frame(name = tableName, stringsAsFactors = FALSE)
     kv <- rbind(wrapper.tableNames, newRow)
     assign('wrapper.tableNames', kv, envir = .GlobalEnv)
 }
