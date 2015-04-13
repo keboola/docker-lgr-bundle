@@ -61,9 +61,7 @@ class RWrapper
      * @param string $sourceTable Name of source table (without schema).
      * @param string $params Arbitrary JSON parameters passed to the script.
      * @param bool $debug True to enable debugging mode, false to disable.
-     * @return array Array with item 'result' containing raw result of the R script. In
-     *  most cases, this contains nothing useful as the results are stored directly in DB.
-     * @throws \RuntimeException
+     * @throws \RuntimeException In case of error.
      */
     public function run($scriptFileName, $rScriptExecutable, $workDirectory, $dbDriver, $sourceTable, $params, $debug)
     {
@@ -114,49 +112,40 @@ class RWrapper
         // process the results
         $this->logger->debug("RETURN: " . var_export($return, true));
         $this->logger->debug("OUTPUT: " . var_export($output, true));
-        switch ($return) {
-            case 0:
-                $this->logger->info("R-script successful, intermediate tables: " . $output);
-                $ret = explode(",", $output);
-                $ret = array_map('trim', $ret);
-                break;
-            default:
-                if ($debug) {
-                    if (file_exists($workDirectory . DIRECTORY_SEPARATOR . 'debug.log')) {
-                        $ret = file($workDirectory . DIRECTORY_SEPARATOR . 'debug.log');
-                        $this->logger->error("The command failed with the following errors:");
-                        foreach ($ret as $line) {
-                            $this->logger->error($line);
-                        }
-                        $ret = implode(" ", $ret);
-                    } else {
-                        $output2 = $process->getErrorOutput();
-                        if ($output2) {
-                            $output .= "Additional error: " . $output2;
-                        }
-                        $this->logger->error("The command failed with the following errors:");
-                        foreach (explode("\n", $output) as $line) {
-                            $this->logger->error($line);
-                        }
-                        $ret = $output;
+        if ($return != 0) {
+            if ($debug) {
+                if (file_exists($workDirectory . DIRECTORY_SEPARATOR . 'debug.log')) {
+                    $ret = file($workDirectory . DIRECTORY_SEPARATOR . 'debug.log');
+                    $this->logger->error("The command failed with the following errors:");
+                    foreach ($ret as $line) {
+                        $this->logger->error($line);
                     }
+                    $ret = implode(" ", $ret);
                 } else {
                     $output2 = $process->getErrorOutput();
                     if ($output2) {
                         $output .= "Additional error: " . $output2;
                     }
-                    $this->logger->error("The command failed with message " . $output);
-                    $ret = $output;
-                    if ((stripos($ret, 'unable to load shared object') !== false)
-                        && (stripos($ret, 'rJava') !== false)
-                    ) {
-                        $ret = 'Cannot load Java JRE, verify that JAVA_HOME path is correct. Stack: ' . $ret;
+                    $this->logger->error("The command failed with the following errors:");
+                    foreach (explode("\n", $output) as $line) {
+                        $this->logger->error($line);
                     }
+                    $ret = $output;
                 }
-                throw new \RuntimeException($ret);
-                break;
+            } else {
+                $output2 = $process->getErrorOutput();
+                if ($output2) {
+                    $output .= "Additional error: " . $output2;
+                }
+                $this->logger->error("The command failed with message " . $output);
+                $ret = $output;
+                if ((stripos($ret, 'unable to load shared object') !== false)
+                    && (stripos($ret, 'rJava') !== false)
+                ) {
+                    $ret = 'Cannot load Java JRE, verify that JAVA_HOME path is correct. Stack: ' . $ret;
+                }
+            }
+            throw new \RuntimeException($ret);
         }
-
-        return $ret;
     }
 }
