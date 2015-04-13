@@ -117,12 +117,12 @@ class RunCommand extends ContainerAwareCommand
         $this->fs = new Filesystem();
 
         // get Storage API token and initialize client
-        $env = getenv('KBC_TOKENID');
+        $env = getenv('KBC_TOKEN');
         if (!empty($env)) {
             $token = $env;
         } else {
             throw new \InvalidArgumentException(
-                "Storage API token must be provided in environment variable KBC_TOKENID. " .
+                "Storage API token must be provided in environment variable KBC_TOKEN. " .
                 "Available environment variables are: ".
                 implode(',', array_merge(array_keys($_SERVER), array_keys($_ENV)))
             );
