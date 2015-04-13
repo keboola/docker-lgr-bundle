@@ -13,3 +13,4 @@
 .idea
 /src/AppBundle/Tests/config.php
 /data/config.yml
+/src/AppBundle/RScripts/RStudioRunner.R
