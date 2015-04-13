@@ -281,7 +281,6 @@ class RunCommand extends ContainerAwareCommand
                 );
                 // write manifest
                 $manifest = [
-                    'name' => $row['value'],
                     'is_public' => false,
                     'is_permanent' => true,
                     'notify' => false,
