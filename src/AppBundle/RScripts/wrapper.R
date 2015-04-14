@@ -204,7 +204,7 @@ wrapper.run <- function(moduleToExecute = NULL, jdbcDriver = NULL, jdbcUrl = NUL
 		redshift.update(paste("DROP TABLE ", tableNamesTable, ";", sep = ""))
 	}
 	redshift.update(paste("CREATE TABLE ", keyValTable, " (name VARCHAR(200), value VARCHAR(200), grouping VARCHAR(200), PRIMARY KEY (name));"), sep = "")
-	redshift.update(paste("CREATE TABLE ", fileNamesTable, " (name VARCHAR(200), value VARCHAR(200), id INTEGER, PRIMARY KEY (name));"), sep = "")
+	redshift.update(paste("CREATE TABLE ", fileNamesTable, " (name VARCHAR(200), value VARCHAR(200), PRIMARY KEY (name));"), sep = "")
 	redshift.update(paste("CREATE TABLE ", tableNamesTable, " (name VARCHAR(200));"), sep = "")
 
 	# load the module
