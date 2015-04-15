@@ -114,6 +114,9 @@ class RunCommand extends ContainerAwareCommand
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        $this->logger = $this->getContainer()->get('logger');
+        $this->logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
+        $this->logger->debug("LGR component started");
         $this->fs = new Filesystem();
 
         // get Storage API token and initialize client
@@ -144,7 +147,6 @@ class RunCommand extends ContainerAwareCommand
         }
 
         // set logger to save messages to Storage
-        $this->logger = $this->getContainer()->get('logger');
         $logHandler = $this->getContainer()->get('app_bundle.event_handler');
         $logHandler->setStorageApiClient($storageClient);
         $this->logger->debug("Token set to: " . $token);
