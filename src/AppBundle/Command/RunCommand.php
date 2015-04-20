@@ -116,7 +116,10 @@ class RunCommand extends ContainerAwareCommand
     {
         $this->logger = $this->getContainer()->get('logger');
         $this->logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
-        $this->logger->debug("LGR component started");
+        $this->logger->debug("Debug: LGR component started");
+        $this->logger->warn("Warn: LGR component started");
+        $this->logger->error("Error: LGR component started");
+        $this->logger->info("Info: LGR component started");
         $this->fs = new Filesystem();
 
         // get Storage API token and initialize client
