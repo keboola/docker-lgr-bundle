@@ -13,19 +13,12 @@ web_profiler:
 
 monolog:
      handlers:
-        my_file_log:
+        out:
             ident: %app_name%
-            type: stream
-            level: debug
-            path: /data/debug.log
-            channels: ["!request", "!event", "!doctrine"]
-            bubble: false
-        syrup_syslog:
-            type: syslog
-            ident: %app_name%
+            type: error_log
             level: debug
             channels: ["!request", "!event", "!doctrine"]
-            formatter: syrup.monolog.formatter
+            bubble: true
         storage_api:
             type: service
             id: app_bundle.event_handler
