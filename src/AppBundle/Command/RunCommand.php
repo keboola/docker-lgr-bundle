@@ -115,9 +115,9 @@ class RunCommand extends ContainerAwareCommand
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->logger = $this->getContainer()->get('logger');
-        $this->logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
+     //   $this->logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
         $this->logger->debug("Debug: LGR component started");
-        $this->logger->warn("Warn: LGR component started");
+        //$this->logger->warn("Warn: LGR component started");
         $this->logger->error("Error: LGR component started");
         $this->logger->info("Info: LGR component started");
         $this->fs = new Filesystem();
